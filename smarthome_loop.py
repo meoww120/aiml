@@ -1,47 +1,46 @@
 def get_sensor_data():
-    temp = int(input("Enter temprature : "))
-    light = bool(int(input("is there light in the room : (1=yes, 0=no) ")))
-    motion = bool(int(input("is there motion : (1=yes, 0=no) ")))
-    smoke = bool(int(input("smoke detected : (1=yes, 0=no) ")))
-    occup = bool(int(input("is the room occupied : (1=yes, 0=no) ")))
+    temp = int(input("Enter temperature: "))
+    light = bool(int(input("Is there light in the room (1=yes, 0=no): ")))
+    motion = bool(int(input("Is there motion (1=yes, 0=no): ")))
+    smoke = bool(int(input("Smoke detected (1=yes, 0=no): ")))
+    occup = bool(int(input("Is the room occupied (1=yes, 0=no): ")))
 
     return temp, motion, smoke, occup, light
-
 
 def smart_home_agent():
 
     while True:
-        
+
         temp, motion, smoke, occup, light = get_sensor_data()
 
-        if temp > 30 :
-            print("temp over 30 --- *AC TURNED ON*\n")
+        if temp > 30:
+            print("Temperature over 30 --- AC TURNED ON\n")
         else:
-            print("temp below 30 --- *AC TURNED OFF*\n")
+            print("Temperature below 30 --- AC TURNED OFF\n")
 
-
-    
         if motion and not light:
-            print("motion and darkness detected --- *light TURNED ON*\n")
+            print("Motion and darkness detected --- LIGHT TURNED ON\n")
         elif motion and light:
-            print("no darkness is detected --- *light TURNED OFF*\n")
-        elif (not motion) and light:
-            print("neither the motion nor the darkness is detected --- *light TURNED OFF*\n")
-        else :
-            print("darkness is detected --- *light TURNED on*\n")
-
-
-        if smoke :
-            print("smoke detected --- *FIRE ALARM TURNED ON*\n")
+            print("No darkness detected --- LIGHT TURNED OFF\n")
+        elif not motion and light:
+            print("No motion and light detected --- LIGHT TURNED OFF\n")
         else:
-            print("smoke not detected --- *FIRE ALARM TURNED OFF*\n")
+            print("Darkness detected --- LIGHT TURNED ON\n")
 
-
-        if occup :
-            print("room occupied --- *door unlocked*\n")
+        if smoke:
+            print("Smoke detected --- FIRE ALARM TURNED ON\n")
         else:
-            print("room not occupied --- *door locked*\n")
+            print("Smoke not detected --- FIRE ALARM TURNED OFF\n")
 
+        if occup:
+            print("Room occupied --- DOOR UNLOCKED\n")
+        else:
+            print("Room not occupied --- DOOR LOCKED\n")
 
+        choice = input("Do you want to continue? (yes/no): ")
+
+        if choice.lower() == "no":
+            print("Smart Home Agent Exited Successfully!")
+            break
 
 smart_home_agent()
